@@ -7,7 +7,9 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static io.restassured.RestAssured.get;
+
+import static io.restassured.RestAssured.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class HrGetRequest {
 
@@ -40,16 +42,16 @@ public class HrGetRequest {
     public void test2(){
         //Given accept type is application/json
         //When user sends get request to /regions/2
-        Response response = RestAssured.given().accept("application/json").when().get("/regions/2");
+        Response response = given().accept("application/json").when().get("/regions/2");
 
         //Then response status code must be 200
-        Assertions.assertEquals(200, response.statusCode());
+        assertEquals(200, response.statusCode());
 
         //and content type equals to application/json
-        Assertions.assertEquals("application/json", response.contentType());
+        assertEquals("application/json", response.contentType());
 
         //and response body contains   Americas
-        Assertions.assertTrue(response.body().asString().contains("Americas"));
+        assertTrue(response.body().asString().contains("Americas"));
 
     }
 
